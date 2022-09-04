@@ -1,0 +1,43 @@
+// SPDX-License-Identifier : GPL-3.0
+
+pragma solidity >= 0.7.0 < 0.9.0;
+
+// 에러 핸들러: require, revert, asset, try/catch
+
+contract lec25{
+
+/*
+    0.4.22 ~ 0.7.x
+    assert : gas 다 소비한 후, 특정한 조건에 부합하지 않으면 (false일 때) 에러를 발생시킨다.
+    revert : 조건없이 에러를 발생시키고, gas를 환불 시켜준다.
+    require : 특정한 조건에 부합하지 않으면 (false일 때) 에러를 발생시키고, gas를 환불 시켜준다.
+*/
+
+    //3000000 gas
+    function assertNow() public pure{
+        assert(false); //test
+    }
+
+    //21322 gas 
+    function revertNow() public pure {
+        revert("error!"); //if or require = if + revert
+    }
+    //21344 gas
+    function requireNow() public pure {
+        require(false, "occurred");
+    }
+
+    function onlyAdults(uint256 _age) public pure returns(string memory){
+        if( _age < 19){ // if true일때 실행
+            revert("You are not allowed to pay for the cigarette");
+        }
+        return "Your payment is succeeded";
+    }
+
+    function onlyAdults2(uint256 _age) public pure returns(string memory){
+        require(_age>19, "You are not allowed to pay for the cigarette"); // require 이 false일때 발생
+        return "Your payment is succeeded";
+    }
+
+
+}
