@@ -1,2 +1,2 @@
-# Blockchain-and-Smar-contract
+# Blockchain-and-Smart-contract
 Solidity test files
